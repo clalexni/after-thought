@@ -2,7 +2,9 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const models = require('../database/queries');
+
+const userRouter = require('./routes/userRouter');
+const thoughtRouter = require('./routes/thoughtRouter');
 
 const PORT = 3000;
 
@@ -12,6 +14,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname  + '/../dist'));
+
+app.use('/users', userRouter);
+app.use('/thoughts', thoughtRouter);
 
 app.listen(PORT, (err) => {
   if (err) {

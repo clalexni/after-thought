@@ -4,7 +4,7 @@ const { ModuleFilenameHelpers } = require('webpack');
 var connection = mysql.createConnection({
   user: 'root',
   password: 'password',
-  databse: 'afterthought'
+  database: 'afterthought'
 });
 
 connection.connect(err => {

@@ -14,7 +14,10 @@ const getUserInfo = (params, callback) => {
 
 // use user email and has_sent to query thought received
 const getThoughtsReceived = (params, callback) => {
-  var queryString = 'select * from thoughts where receiver_email = ? and has_sent = 1';
+  var queryString = `select * from thoughts
+                      where receiver_email = (
+                      select email from users where username = ?
+                      ) and has_sent = 1`;
   db.query(queryString, params, (err, thoughtsReceived) => {
     if (err) {
       callback(err, null);
@@ -26,7 +29,10 @@ const getThoughtsReceived = (params, callback) => {
 
 // use user id to query user's thoughts
 const getThoughts = (params, callback) => {
-  var queryString = 'select * from thoughts where writer = ?';
+  var queryString = `select * from thoughts
+                      where writer = (
+                        select id from users where username = ?
+                      )`;
   db.query(queryString, params, (err, userThoughts) => {
     if (err) {
       callback(err, null);
@@ -37,7 +43,7 @@ const getThoughts = (params, callback) => {
 }
 // update modifed date of thought by id
 const updateThoughtDate = (params, callback) => {
-  var queryString = 'update thought set modified_date = CURRENT_TIMESTAMP where id = ?';
+  var queryString = 'update thoughts set modified_date = CURRENT_TIMESTAMP where id = ?';
   db.query(queryString, params, (err, result) => {
     if (err) {
       callback(err, null);
@@ -50,7 +56,7 @@ const updateThoughtDate = (params, callback) => {
 // update sent status of a thought
 // should also update modified date as well
 const updateThoughtAsSent = (params, callback) => {
-  var queryString = 'update thought set has_sent = 1 where id = ?';
+  var queryString = 'update thoughts set has_sent = 1 where id = ?';
   db.query(queryString, params, (err, result) => {
     if (err) {
       callback(err, null);
