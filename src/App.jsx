@@ -1,6 +1,6 @@
-
 import React from "react";
 import { hot } from 'react-hot-loader/root';
+import { Link } from "react-router-dom";
 
 class App extends React.Component {
   render() {
