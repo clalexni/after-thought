@@ -15,12 +15,13 @@ CREATE TABLE users (
 CREATE TABLE thoughts (
   id INTEGER NOT NULL AUTO_INCREMENT,
   message text NOT NULL,
-  writer INTEGER NOT NULL,
-  has_sent BOOLEAN DEFAULT 0,
+  writer_id INTEGER NOT NULL,
+  writer_name VARCHAR(20) NOT NULL,
   receiver_name VARCHAR(20) NOT NULL,
   receiver_email VARCHAR(319) NOT NULL,
+  has_sent BOOLEAN DEFAULT 0,
   create_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   modified_date DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  FOREIGN KEY (writer) REFERENCES users(id)
+  FOREIGN KEY (writer_id) REFERENCES users(id)
 );

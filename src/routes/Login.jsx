@@ -2,6 +2,7 @@ import React, { useContext, useState} from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../UserContext.js";
 import axios from 'axios';
+import Home from './Home.jsx';
 
 const Login = () => {
 
@@ -25,8 +26,8 @@ const Login = () => {
       })
   };
 
-  return (
-    <>
+  return (user === null)?
+    (
       <div className="login">
         <div className='title'>login</div>
         <form>
@@ -42,8 +43,9 @@ const Login = () => {
           </Link>
         </form>
       </div>
-    </>
-  )
+    ):
+    (<Home/>)
+  
 }
 
 export default Login;

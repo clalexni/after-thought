@@ -11,8 +11,21 @@ const getUserInfo = (params, callback) => {
     }
   });
 }
+// get user name by user_id
+/*
+const getUserInfoById = (params, callback) => {
+  var queryString = `select * from users where id=?`;
+  db.query(queryString, params, (err, userInfo) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, userInfo)
+    }
+  });
+}
+*/
 
-// use user email and has_sent to query thought received
+// use user email and has_sent to query thought received  (should contain writer name)
 const getThoughtsReceived = (params, callback) => {
   var queryString = `select * from thoughts
                       where receiver_email = (
@@ -32,7 +45,7 @@ const getThoughts = (params, callback) => {
   var queryString = `select * from thoughts
                       where writer = (
                         select id from users where username = ?
-                      )`;
+                      ) and has_sent = 0`;
   db.query(queryString, params, (err, userThoughts) => {
     if (err) {
       callback(err, null);
@@ -41,6 +54,37 @@ const getThoughts = (params, callback) => {
     }
   });
 }
+
+// update all modeifed date where has_sent is 0
+const updateAllThoughtsTimer = (params , callback) => {
+  var queryString = `update thoughts
+                     set modified_date = CURRENT_TIMESTAMP
+                     where writer = (select id from users where username = ?)
+                     and has_sent = 0`;
+  
+  db.query(queryString, params, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  })
+};
+
+
+// post a thought
+const postThought = (params, callback) => {
+  var queryString = `insert into thougths (message, writer_id, writer_name, receiver_name, receiver_email)
+                     values (?, ?, ?, ?, ?)`;
+  db.query(queryString, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
 // update modifed date of thought by id
 const updateThoughtDate = (params, callback) => {
   var queryString = 'update thoughts set modified_date = CURRENT_TIMESTAMP where id = ?';
@@ -66,10 +110,14 @@ const updateThoughtAsSent = (params, callback) => {
   });
 }
 
+
+
 module.exports = {
   getUserInfo,
   getThoughtsReceived,
   getThoughts,
   updateThoughtDate,
-  updateThoughtAsSent
+  updateThoughtAsSent,
+  updateAllThoughtsTimer,
+  postThought
 };

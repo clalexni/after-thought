@@ -14,8 +14,9 @@
   --colorful-error-extra-color: #7e2a33;
   --roundness: 0.5rem;
 
-  margin-left: 20%;
-  margin-right: 20%;
+  font-size: 20px;
+  margin-left: 15%;
+  margin-right: 15%;
   color: var(--sub-color)
 }
 
@@ -36,6 +37,10 @@ html {
   color: var(--sub-color);
   text-decoration: none; /* remove underline*/
 }
+
+.nav-link:hover{
+  color: var(--caret-color);
+}
 .navbar {
   margin-top: 30px;
   overflow: hidden;
@@ -43,8 +48,7 @@ html {
 }
 
 /*form*/
-input,
-textarea {
+input, textarea, .displayCard{
   outline: none;
   border: none;
   border-radius: var(--roundness);
@@ -60,10 +64,15 @@ textarea {
 }
 
 .login .title {
-  margin-bottom: 2%
+  margin-bottom: 2%;
+}
+
+.title {
+  color: var(--sub-color);
 }
 
 input {
+  font-size: 20px;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -72,12 +81,20 @@ input {
 
 .login-btn {
   text-decoration: none;
+  font-size: 20px;
   color: var(--text-color);
+  width: 100%;
+}
+
+.login-btn:hover {
+  color: var(--caret-color);
 }
 
 
 /* home */
 .hello-msg {
-  font-size: 20px;
+  color: var(--main-color);
+  font-size: 18px;
   margin-top: 5%;
+  margin-bottom: 3%;
 }
