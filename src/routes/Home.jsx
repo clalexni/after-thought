@@ -2,6 +2,8 @@ import axios from "axios";
 import React, {useContext, useEffect, useState} from "react";
 import UserContext from "../UserContext.js";
 import ThoughtCard from "../components/ThoughtCard.jsx";
+import ReceivedCard from "../components/ReceivedCard.jsx";
+
 import Login from './Login.jsx';
 
 const Home = () => {
@@ -37,7 +39,7 @@ const Home = () => {
     (
       <>
         <div className='hello-msg'>Hello, {user.nickname} ...</div>
-        <div style={{ float: 'left', width: '50%'}} id='thought-left-container'>
+        <div style={{ marginRight: '1.5%', float: 'left', width: '48.5%'}} id='thought-left-container'>
         <p style={{marginTop: '0'}}>Your thoughts: </p>
           {
             thoughts.map(thought => {
@@ -45,11 +47,11 @@ const Home = () => {
             })
           }
         </div>
-        <div style={{ float: 'left', width: '50%'}} id='thought-right-container'>
+        <div style={{ marginLeft: '1.5%', float: 'left', width: '48.5%'}} id='thought-right-container'>
         <p style={{marginTop: '0'}}>Thought Received: </p>
           {
             receivedThoughts.map(thought => {
-              return <ThoughtCard key={thought.id} thought={thought}/>
+              return <ReceivedCard key={thought.id} thought={thought}/>
             })
           }
         </div>

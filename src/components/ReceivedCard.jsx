@@ -6,7 +6,7 @@ const ReceivedCard = ({thought}) => {
     (
       <div style={{width: 'fitContent'}} className='displayCard'>
         <p style={{marginTop: '0'}}>
-          <span style={{color: '#646669'}}>Received From </span> {thought.receiver_name}
+          <span style={{color: '#646669'}}>From </span> {thought.writer_name}
         </p>
         <p>{thought.message}</p>
         <p style={{marginBottom: '0', color: '#646669'}}>

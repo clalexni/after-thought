@@ -58,6 +58,14 @@ input, textarea, .displayCard{
   color: var(--text-color);
 }
 
+.recipient-input {
+  font-family: 'Roboto Mono', monospace;
+  margin-bottom: 1%;
+}
+textarea {
+  font-size: 20px;
+}
+
 .login {
   margin-top: 20%;
   text-align: center;
@@ -79,14 +87,14 @@ input {
   margin-bottom: 2%;
 }
 
-.login-btn {
+.login-btn, .post-btn {
   text-decoration: none;
   font-size: 20px;
   color: var(--text-color);
   width: 100%;
 }
 
-.login-btn:hover {
+.login-btn:hover, .post-btn:hover {
   color: var(--caret-color);
 }
 
@@ -96,5 +104,9 @@ input {
   color: var(--main-color);
   font-size: 18px;
   margin-top: 5%;
+  margin-bottom: 3%;
+}
+
+.displayCard {
   margin-bottom: 3%;
 }

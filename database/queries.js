@@ -43,11 +43,12 @@ const getThoughtsReceived = (params, callback) => {
 // use user id to query user's thoughts
 const getThoughts = (params, callback) => {
   var queryString = `select * from thoughts
-                      where writer = (
+                      where writer_id = (
                         select id from users where username = ?
                       ) and has_sent = 0`;
   db.query(queryString, params, (err, userThoughts) => {
     if (err) {
+      console.error(err);
       callback(err, null);
     } else {
       callback(null, userThoughts);
@@ -74,8 +75,7 @@ const updateAllThoughtsTimer = (params , callback) => {
 
 // post a thought
 const postThought = (params, callback) => {
-  var queryString = `insert into thougths (message, writer_id, writer_name, receiver_name, receiver_email)
-                     values (?, ?, ?, ?, ?)`;
+  var queryString = `insert into thoughts (message, writer_id, writer_name, receiver_name, receiver_email) values (?, ?, ?, ?, ?)`;
   db.query(queryString, (err, result) => {
     if (err) {
       callback(err, null);
